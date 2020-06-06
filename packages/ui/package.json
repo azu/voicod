@@ -1,0 +1,57 @@
+{
+  "name": "ui",
+  "version": "1.0.0",
+  "description": "UI for Voicod",
+  "homepage": "https://github.com/azu/voicod/tree/master/packages/ui/",
+  "bugs": {
+    "url": "https://github.com/azu/voicod/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/azu/voicod.git"
+  },
+  "license": "MIT",
+  "author": "azu",
+  "files": [
+    "bin/",
+    "lib/",
+    "src/"
+  ],
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "dev": "snowpack dev",
+    "build": "snowpack build",
+    "clean": "rimraf lib/",
+    "prettier": "prettier --write \"**/*.{js,jsx,ts,tsx,css}\"",
+    "prepublish": "npm run --if-present build",
+    "test": "mocha \"test/**/*.ts\"",
+    "watch": "tsc -p . --watch"
+  },
+  "prettier": {
+    "printWidth": 120,
+    "singleQuote": false,
+    "tabWidth": 4
+  },
+  "devDependencies": {
+    "@snowpack/app-scripts-preact": "^1.1.4",
+    "@types/mocha": "^7.0.2",
+    "@types/node": "^14.0.11",
+    "cross-env": "^7.0.2",
+    "mocha": "^7.2.0",
+    "prettier": "^2.0.5",
+    "rimraf": "^3.0.2",
+    "snowpack": "^2.3.1",
+    "ts-node": "^8.10.2",
+    "ts-node-test-register": "^8.0.1",
+    "typescript": "^3.9.5"
+  },
+  "dependencies": {
+    "@codemirror/next": "^0.6.0",
+    "preact": "^10.4.4"
+  }
+}

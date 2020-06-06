@@ -1,0 +1,54 @@
+{
+  "private": true,
+  "name": "voicod",
+  "version": "1.0.0",
+  "description": "Voice note editor",
+  "keywords": [
+    "voice",
+    "note",
+    "memo",
+    "editor",
+    "text-to-speech"
+  ],
+  "homepage": "https://github.com/azu/voicod",
+  "bugs": {
+    "url": "https://github.com/azu/voicod/issues"
+  },
+  "repository": "https://github.com/azu/voicod.git",
+  "license": "MIT",
+  "author": "azu",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "cross-env NODE_ENV=production tsc -p .",
+    "clean": "rimraf lib/",
+    "prettier": "prettier --write \"**/*.{js,jsx,ts,tsx,css}\"",
+    "test": "mocha \"test/**/*.ts\""
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,css}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "prettier": {
+    "printWidth": 120,
+    "singleQuote": false,
+    "tabWidth": 4
+  },
+  "devDependencies": {
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.9",
+    "prettier": "^2.0.5"
+  }
+}
