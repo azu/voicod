@@ -1821,6 +1821,11 @@ component-emitter@^1.2.1:
   resolved "https://registry.yarnpkg.com/component-emitter/-/component-emitter-1.3.0.tgz#16e4070fba8ae29b679f2215853ee181ab2eabc0"
   integrity sha512-Rd3se6QB+sO1TwqZjscQrurpEPIfO0/yYnSin6Q/rD3mOutHvUrCAhJub3r90uNb+SESBuE0QYoB90YdfatsRg==
 
+composite-symbol@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/composite-symbol/-/composite-symbol-1.0.2.tgz#3c4697fec8211d2bafb3470dbce39c55c7843505"
+  integrity sha512-auPt4BGl1Ry1HVWQvI2OswlTV7aJpZ7DHZ8KkG6EpFHQ9kioteqshr3HCGIKWIHjHpGREbqgPWMsYGLby+O63w==
+
 compressible@^2.0.18:
   version "2.0.18"
   resolved "https://registry.yarnpkg.com/compressible/-/compressible-2.0.18.tgz#af53cca6b070d4c3c0750fbd77286a6d7cc46fba"
@@ -2145,6 +2150,11 @@ eventemitter3@^4.0.0:
   version "4.0.4"
   resolved "https://registry.yarnpkg.com/eventemitter3/-/eventemitter3-4.0.4.tgz#b5463ace635a083d018bdc7c917b4c5f10a85384"
   integrity sha512-rlaVLnVxtxvoyLsQQFBx53YmXHDxRIzzTLbdfxqi4yocpSjAxXwkU0cScM5JgSKMqEhrZpnvQ2D9gjylR0AimQ==
+
+eventmit@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/eventmit/-/eventmit-1.0.2.tgz#9f55e10f23c45fee3a6d4818ff2970f467d08b68"
+  integrity sha512-6WydLZQIgPyyD8faMVDjD80tD0DfQqshoWw7JYaq8u7jedX5RW9xX6DOux3k73A1V3NG+A39tBv9+bgafXsLfg==
 
 exec-sh@^0.3.2:
   version "0.3.4"
@@ -4607,6 +4617,11 @@ typescript@^3.9.5:
   version "3.9.5"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.9.5.tgz#586f0dba300cde8be52dd1ac4f7e1009c1b13f36"
   integrity sha512-hSAifV3k+i6lEoCJ2k6R2Z/rp/H3+8sdmcn5NrS3/3kE7+RyZXm9aqvxWqjEXHAd8b0pShatpcdMTvEdvAJltQ==
+
+ulid@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/ulid/-/ulid-2.3.0.tgz#93063522771a9774121a84d126ecd3eb9804071f"
+  integrity sha512-keqHubrlpvT6G2wH0OEfSW4mquYRcbe/J8NMmveoQOjUqmo+hXtO+ORCpWhdbZ7k72UtY61BL7haGxW6enBnjw==
 
 unicode-canonical-property-names-ecmascript@^1.0.4:
   version "1.0.4"

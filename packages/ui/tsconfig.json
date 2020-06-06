@@ -1,5 +1,4 @@
 {
-  "extends": "@snowpack/app-scripts-preact/tsconfig.base.json",
   "compilerOptions": {
     /* Basic Options */
     "module": "commonjs",

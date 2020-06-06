@@ -1,10 +1,12 @@
 import { h, render } from "preact";
-import { Editor } from "./Editor";
+import { VoiceEditor } from "./VoiceEditor/VoiceEditor";
+import { VoiceUI } from "./VoiceUI/VoiceUI";
 
 export const App = () => {
     return (
         <main>
-            <Editor />
+            <VoiceEditor />
+            <VoiceUI forever={true} />
         </main>
     );
 };

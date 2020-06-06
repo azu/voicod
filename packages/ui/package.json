@@ -52,6 +52,9 @@
   },
   "dependencies": {
     "@codemirror/next": "^0.6.0",
-    "preact": "^10.4.4"
+    "composite-symbol": "^1.0.2",
+    "eventmit": "^1.0.2",
+    "preact": "^10.4.4",
+    "ulid": "^2.3.0"
   }
 }
