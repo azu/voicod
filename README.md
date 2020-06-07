@@ -6,7 +6,7 @@ Voice note editor
 
 - Open <https://voicod.netlify.app/>
 
-:memo: Require [SpeechRecognition](https://developer.mozilla.org/docs/Web/API/SpeechRecognition/SpeechRecognition) API suported browser like Google Chrome
+:memo: Require [SpeechRecognition](https://developer.mozilla.org/docs/Web/API/SpeechRecognition/SpeechRecognition) API supported browser like Google Chrome
 
 ## Changelog
 
