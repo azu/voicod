@@ -154,3 +154,6 @@ fabric.properties
 
 lib
 build
+
+# Local Netlify folder
+.netlify

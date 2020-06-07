@@ -17,18 +17,15 @@
   "repository": "https://github.com/azu/voicod.git",
   "license": "MIT",
   "author": "azu",
-  "directories": {
-    "lib": "lib",
-    "test": "test"
-  },
   "workspaces": [
     "packages/*"
   ],
   "scripts": {
-    "build": "cross-env NODE_ENV=production tsc -p .",
-    "clean": "rimraf lib/",
+    "build": "yarn workspaces run build",
+    "clean": "yarn workspaces run clean",
     "prettier": "prettier --write \"**/*.{js,jsx,ts,tsx,css}\"",
-    "test": "mocha \"test/**/*.ts\""
+    "test": "yarn workspaces run test",
+    "netlify": "cd packages/ui/ && yarn run build"
   },
   "husky": {
     "hooks": {
