@@ -2,15 +2,11 @@
 
 Voice note editor
 
-## Install
-
-Install with [npm](https://www.npmjs.com/):
-
-    npm install voicod
-
 ## Usage
 
-- [ ] Write usage instructions
+- Open <https://voicod.netlify.app/>
+
+:memo: Require [SpeechRecognition](https://developer.mozilla.org/docs/Web/API/SpeechRecognition/SpeechRecognition) API suported browser like Google Chrome
 
 ## Changelog
 
