@@ -929,17 +929,17 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@codemirror/next@^0.6.0":
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/@codemirror/next/-/next-0.6.0.tgz#ea338780e707c2f576cc7c03713ff1f28aa50da2"
-  integrity sha512-q1lrOUqUHDXj17SxmXFmeCmsswSxwV+hYlPjP4OQXjRtxfzbH/epagM+h36CvaxLcv0ALba00xAaeUbADOHw8Q==
+"@codemirror/next@^0.7.1":
+  version "0.7.1"
+  resolved "https://registry.yarnpkg.com/@codemirror/next/-/next-0.7.1.tgz#f5a1679339ff4922e198cf145718ffea4ff2786b"
+  integrity sha512-+2VRtlwi2mW/VZfTW9N3WVOaurOzxwgKB2oPviqirsp+VRR/AhevaOqEoae5XIFkVFoB5PC4PyIySHRFDCO5mg==
   dependencies:
-    lezer "^0.8.3"
-    lezer-css "^0.8.3"
-    lezer-html "^0.8.4"
-    lezer-javascript "^0.8.3"
-    lezer-python "^0.8.0"
-    lezer-tree "^0.8.4"
+    lezer "^0.9.0"
+    lezer-css "^0.9.0"
+    lezer-html "^0.9.0"
+    lezer-javascript "^0.9.0"
+    lezer-python "^0.9.0"
+    lezer-tree "^0.9.0"
     style-mod "^2.2.2"
     w3c-keyname "^2.2.4"
 
@@ -1188,9 +1188,9 @@
   integrity sha512-c3Xy026kOF7QOTn00hbIllV1dLR9hG9NkSrLQgCVs8NF6sBU+VGWjD3wLPhmh1TYAc7ugCFsvHYMN4VcBN1U1A==
 
 "@types/istanbul-lib-coverage@*", "@types/istanbul-lib-coverage@^2.0.0":
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/@types/istanbul-lib-coverage/-/istanbul-lib-coverage-2.0.2.tgz#79d7a78bad4219f4c03d6557a1c72d9ca6ba62d5"
-  integrity sha512-rsZg7eL+Xcxsxk2XlBt9KcG8nOp9iYdKCOikY9x2RFJCyOdNj4MKPQty0e8oZr29vVAzKXr1BmR+kZauti3o1w==
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/@types/istanbul-lib-coverage/-/istanbul-lib-coverage-2.0.3.tgz#4ba8ddb720221f432e443bd5f9117fd22cfd4762"
+  integrity sha512-sz7iLqvVUg1gIedBOvlkxPlc8/uVzyS5OwGz1cKjXzkl3FpL3al0crU8YGU1WoHkxn0Wxbw5tyi6hvzJKNzFsw==
 
 "@types/istanbul-lib-report@*":
   version "3.0.0"
@@ -1220,9 +1220,9 @@
   integrity sha512-ZvO2tAcjmMi8V/5Z3JsyofMe3hasRcaw88cto5etSVMwVQfeivGAlEYmaQgceUSVYFofVjT+ioHsATjdWcFt1w==
 
 "@types/node@*", "@types/node@^14.0.11":
-  version "14.0.11"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.0.11.tgz#61d4886e2424da73b7b25547f59fdcb534c165a3"
-  integrity sha512-lCvvI24L21ZVeIiyIUHZ5Oflv1hhHQ5E1S25IRlKIXaRkVgmXpJMI3wUJkmym2bTbCe+WoIibQnMVAU3FguaOg==
+  version "14.0.13"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.0.13.tgz#ee1128e881b874c371374c1f72201893616417c9"
+  integrity sha512-rouEWBImiRaSJsVA+ITTFM6ZxibuAlTuNOCyxVbwreu6k6+ujs7DfnU9o+PShFhET78pMBl3eH+AGSI5eOTkPA==
 
 "@types/normalize-package-data@^2.4.0":
   version "2.4.0"
@@ -1626,9 +1626,9 @@ camelcase@^5.0.0, camelcase@^5.3.1:
   integrity sha512-L28STB170nwWS63UjtlEOE3dldQApaJXZkOI1uMFfzf3rRuPegHaHesyee+YxQ+W6SvRDQV6UrdOdRiR153wJg==
 
 caniuse-lite@^1.0.30001043:
-  version "1.0.30001078"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001078.tgz#e1b6e2ae327b6a1ec11f65ec7a0dde1e7093074c"
-  integrity sha512-sF12qXe9VMm32IEf/+NDvmTpwJaaU7N1igpiH2FdI4DyABJSsOqG3ZAcFvszLkoLoo1y6VJLMYivukUAxaMASw==
+  version "1.0.30001081"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001081.tgz#40615a3c416a047c5a4d45673e5257bf128eb3b5"
+  integrity sha512-iZdh3lu09jsUtLE6Bp8NAbJskco4Y3UDtkR3GTCJGsbMowBU5IWDFF79sV2ws7lSqTzWyKazxam2thasHymENQ==
 
 capture-exit@^2.0.0:
   version "2.0.0"
@@ -1666,9 +1666,9 @@ chalk@^3.0.0:
     supports-color "^7.1.0"
 
 chalk@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/chalk/-/chalk-4.0.0.tgz#6e98081ed2d17faab615eb52ac66ec1fe6209e72"
-  integrity sha512-N9oWFcegS0sFr9oh1oz2d7Npos6vNoWW9HvtCg5N1KRFpUhaAhvTv5Y58g880fZaEYSNm3qDz8SU1UrGvp+n7A==
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/chalk/-/chalk-4.1.0.tgz#4e14870a618d9e2edd97dd8345fd9d9dc315646a"
+  integrity sha512-qwx12AxXe2Q5xQ43Ac//I6v5aXTipYrSESdOgzrN+9XjgEpyjpKuvSGaN4qE93f7TQTlerQQ8S+EQ0EyDoVL1A==
   dependencies:
     ansi-styles "^4.1.0"
     supports-color "^7.1.0"
@@ -2050,9 +2050,9 @@ dotenv@^8.2.0:
   integrity sha512-8sJ78ElpbDJBHNeBzUbUVLsqKdccaa/BXF1uPTw3GrvQTBgrQrtObr2mUrE38vzYd8cEv+m/JBfDLioYcfXoaw==
 
 electron-to-chromium@^1.3.413:
-  version "1.3.463"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.463.tgz#bae89d8c2c69b4be32f80221fe49ab5786fab368"
-  integrity sha512-mAqvpG0efJXV9BGXPVjFdBFiqmawGoIc+c8T2uXYEvbV1/261PaOT0EzZ9dKW4IdGiHXQGSKnnOU86QhJ+5JcA==
+  version "1.3.467"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.467.tgz#84eeb332134d49f0e49b88588824e56b20af9e27"
+  integrity sha512-U+QgsL8TZDU/n+rDnYDa3hY5uy3C4iry9mrJS0PNBBGwnocuQ+aHSfgY44mdlaK9744X5YqrrGUvD9PxCLY1HA==
 
 emoji-regex@^7.0.1:
   version "7.0.3"
@@ -3029,45 +3029,45 @@ levenary@^1.1.1:
   dependencies:
     leven "^3.1.0"
 
-lezer-css@^0.8.3:
-  version "0.8.3"
-  resolved "https://registry.yarnpkg.com/lezer-css/-/lezer-css-0.8.3.tgz#1c5b4ccdc6bf77448b756e13dc099dd97dba38b7"
-  integrity sha512-pL0OyYRdG+ZPW+DerO8AEKmwEp7F3+tmLKiofzbiGsUe8xHAOtavIJL0wWYxTBb7uR4Zykjm2nnSaCuveccHHg==
+lezer-css@^0.9.0:
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/lezer-css/-/lezer-css-0.9.0.tgz#fc18e5056c25a62706013d30e8661ed4052afb40"
+  integrity sha512-rpK/O4++1K+zkHuo4rWZrJiFeaJ1vITWWPTqJK2wkwvbzd3FqvJmFC92oLC43eRhloOuiCD7R2nueRZAR6Oocg==
   dependencies:
-    lezer "^0.8.0"
+    lezer "^0.9.0"
 
-lezer-html@^0.8.4:
-  version "0.8.4"
-  resolved "https://registry.yarnpkg.com/lezer-html/-/lezer-html-0.8.4.tgz#6a8458fabbcf7f8188cf0b09e0e22a9ee12dbdfb"
-  integrity sha512-KEFH0ZEEVm7t3QlSuqGDACL718uqUBxfkoFp5Rel1VPp4AvcoXffVIA/Owa3DIqJWulqEPvPTse3me5L+I6MQg==
+lezer-html@^0.9.0:
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/lezer-html/-/lezer-html-0.9.0.tgz#1dc269e072fa576da08e886e945050ab967a6521"
+  integrity sha512-CLceSQ5mOxQnqZXROX1+A34jAelJaSwiPyOLDMXk4SFLvPOIq/WkAlLyquJ2wY3JaWCwkrdPsP7OzVHd5unpfQ==
   dependencies:
-    lezer "^0.8.0"
+    lezer "^0.9.0"
 
-lezer-javascript@^0.8.3:
-  version "0.8.4"
-  resolved "https://registry.yarnpkg.com/lezer-javascript/-/lezer-javascript-0.8.4.tgz#ee4e0dc4e902ea804460aeb170751a1371adc217"
-  integrity sha512-Vw/9cftua9ae084OuuPP0iwo2utSywcGGph1GZepFFdapvysJGG3Ac5rnP7AsO0Zg9KGr88wC5das5ftq9uVZg==
+lezer-javascript@^0.9.0:
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/lezer-javascript/-/lezer-javascript-0.9.0.tgz#6b1c254ea0bc39ebdc47fcc7964b4e28a75ec870"
+  integrity sha512-UkS4QvbpebWBGJacGB4baK00sJR6ISBHGhnsj0eUWNw3YBE7qiFfnyxDgRdtZ6QUxbMVUH+bq8MzhPlqPOK2CQ==
   dependencies:
-    lezer "^0.8.0"
+    lezer "^0.9.0"
 
-lezer-python@^0.8.0:
-  version "0.8.1"
-  resolved "https://registry.yarnpkg.com/lezer-python/-/lezer-python-0.8.1.tgz#bb60a8e1debc227f0bff60482cafc549c8e4a8b8"
-  integrity sha512-Gg9LaK1tnRY1pF6nKrdJNoIVco8TQO0dHD5aApVd6/lgwonPeQ5aASJVwn8USCMsDpIRi4JDNMEvLkIyMuIQXQ==
+lezer-python@^0.9.0:
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/lezer-python/-/lezer-python-0.9.0.tgz#6b3a7de643a1ea1a0ac7d8b23b9007f484b961ac"
+  integrity sha512-sJ/YY48uQMZDTqQx6GCkqnyhxjph3YghcLqdrAyU8KVKxMHvwWRiSdEKtp3k7uQLhP4Bzp5NfkAFaSEK6wH1Mw==
   dependencies:
-    lezer "^0.8.4"
+    lezer "^0.9.0"
 
-lezer-tree@^0.8.0, lezer-tree@^0.8.4:
-  version "0.8.4"
-  resolved "https://registry.yarnpkg.com/lezer-tree/-/lezer-tree-0.8.4.tgz#aaf65ebbbb2296d65e3ed079dce1c26631ff9f91"
-  integrity sha512-gg9WYNa7xM1rhHRX+z2NaqhUxi1dndtdo3htqfazHXeFKzaR8hK1lT2pQYdFxWvtFbY0W9aG/VQn77jHuhu86g==
+lezer-tree@^0.9.0:
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/lezer-tree/-/lezer-tree-0.9.0.tgz#c62aee4ddcd18e210369162ea1c93cd10365f80f"
+  integrity sha512-bz/jTNrQFCJ7GBQIkw8y44DWMKL+rrPh40GnrFhnnrezA22T8US38gJAnAAv23zYsoYQfHmwCHJpxv9A3E1OTQ==
 
-lezer@^0.8.0, lezer@^0.8.3, lezer@^0.8.4:
-  version "0.8.5"
-  resolved "https://registry.yarnpkg.com/lezer/-/lezer-0.8.5.tgz#8a724c7af486f95ed88d54b009b221472cf1849f"
-  integrity sha512-FnX53xvQiDNg/IBNqng2cz0okwsSHbyv5J8pzLCrMUSQspZrGZA8r/av60dTKcjsauPhc8rdvKsXteiadZmkhA==
+lezer@^0.9.0:
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/lezer/-/lezer-0.9.0.tgz#545c05e22ceb9c9010f053c60bb7ba93edc8f3cd"
+  integrity sha512-pMUwKrV7y3hY0gfP6D63Xi4Ij0rUi0uVM/RiFv52CNGYUpQkTqptNJOQsDtkSBYl9gC6edZ3PfjnkWvZ0CY7xw==
   dependencies:
-    lezer-tree "^0.8.0"
+    lezer-tree "^0.9.0"
 
 lines-and-columns@^1.1.6:
   version "1.1.6"
@@ -4039,9 +4039,9 @@ rimraf@^3.0.0, rimraf@^3.0.2:
     glob "^7.1.3"
 
 rollup@^2.13.1:
-  version "2.13.1"
-  resolved "https://registry.yarnpkg.com/rollup/-/rollup-2.13.1.tgz#06ac5be4f85df0b79f23cdfa90de63e78095a984"
-  integrity sha512-EiICynxIO1DTFmFn+/98gfaqCToK2nbjPjHJLuNvpcwc+P035VrXmJxi3JsOhqkdty+0cOEhJ26ceGTY3UPMPQ==
+  version "2.15.0"
+  resolved "https://registry.yarnpkg.com/rollup/-/rollup-2.15.0.tgz#1324633188c7f82138bd3bdc99416009ee541f48"
+  integrity sha512-HAk4kyXiV5sdNDnbKWk5zBPnkX/DAgx09Kbp8rRIRDVsTUVN3vnSowR7ZHkV6/lAiE6c2TQ8HtYb72aCPGW4Jw==
   optionalDependencies:
     fsevents "~2.1.2"
 
@@ -4207,9 +4207,9 @@ snapdragon@^0.8.1:
     use "^3.1.0"
 
 snowpack@^2.3.1:
-  version "2.3.1"
-  resolved "https://registry.yarnpkg.com/snowpack/-/snowpack-2.3.1.tgz#b1df1e309b3425f048e0dff73b25c00ae1186b64"
-  integrity sha512-bOLWe43AJNz7C8x+ZD/qWBdYvZNgNs5M9AF/6M7tN9uqLDBrf5ZDREzjLc8PRXUNmQFA/meotnoWyPX/aFoFeg==
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/snowpack/-/snowpack-2.4.0.tgz#4a4552c6c7e0137f31581d89dd0ea43478049967"
+  integrity sha512-R/zKFBvJJr+I9F04eOm4mFagCjJs+cUT+k0z/CKG/5McDNQM5cOZelsyvei8UM5733qXHFEQ1pMDN7b+xZqKEA==
   dependencies:
     "@babel/plugin-syntax-import-meta" "^7.8.3"
     "@rollup/plugin-alias" "^3.0.1"
