@@ -53,8 +53,8 @@
     "vite": "^2.7.13"
   },
   "dependencies": {
-    "@codemirror/commands": "^0.19.8",
     "@codemirror/basic-setup": "^0.19.1",
+    "@codemirror/commands": "^0.19.8",
     "composite-symbol": "^1.0.2",
     "eventmit": "^1.1.0",
     "preact": "^10.6.5",

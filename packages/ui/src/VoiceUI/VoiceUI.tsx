@@ -1,21 +1,25 @@
 import { h } from "preact";
 import { useCallback, useEffect, useState } from "preact/hooks";
 import { speakerSpeakSentenceUseCase } from "./SpeakerSpeakSentenceUseCase";
+import type { SpeechRecognition } from "./SpeechRecognition";
+import { useTabVisibility } from "./use-tab-visibility";
 
 export type VoiceUIStatus = "user-want-to-stop" | "pause" | "processing" | "error";
 export type VoiceUIProps = {
     forever: boolean;
 };
 // https://github.com/1heisuzuki/speech-to-text-webcam-overlay/blob/master/index.html
-const SpeechRecognition = window.SpeechRecognition ?? ((window as any).webkitSpeechRecognition as SpeechRecognition);
+const _SpeechRecognition =
+    (window as any).SpeechRecognition ?? ((window as any).webkitSpeechRecognition as SpeechRecognition);
 export const VoiceUI = (_props: VoiceUIProps) => {
     const [status, setStatus] = useState<VoiceUIStatus>("pause");
     const [recognition, setRecognition] = useState<SpeechRecognition | null>(null);
     const [text, setText] = useState("");
+    const visible = useTabVisibility();
     useEffect(() => {
         // 参考: https://jellyware.jp/kurage/iot/webspeechapi.html
         const lang = "ja-JP";
-        const _recognition = new SpeechRecognition();
+        const _recognition: SpeechRecognition = new _SpeechRecognition();
         // @ts-ignore
         const restart = () => {
             if (_recognition) {
@@ -55,7 +59,7 @@ export const VoiceUI = (_props: VoiceUIProps) => {
             console.info("[speech] onspeechend");
             setStatus("pause");
         };
-        _recognition.onresult = function (event) {
+        _recognition.onresult = function (event: any) {
             const results = event.results;
             console.log(event.resultIndex, results);
             for (let i = event.resultIndex; i < results.length; i++) {
@@ -69,12 +73,16 @@ export const VoiceUI = (_props: VoiceUIProps) => {
             }
         };
         setRecognition(_recognition);
-        _recognition.start();
-        setStatus("processing");
+        if (visible) {
+            _recognition.start();
+            setStatus("processing");
+        } else {
+            _recognition.stop();
+        }
         return () => {
             recognition?.stop();
         };
-    }, []);
+    }, [visible]);
     const onClickToggleButton = useCallback(() => {
         if (status === "processing") {
             setStatus("user-want-to-stop");

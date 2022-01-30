@@ -6,15 +6,12 @@
     "esModuleInterop": true,
     "newLine": "LF",
     "outDir": "./lib/",
-    "target": "ES2015",
+    "target": "ES2018",
     "sourceMap": true,
     "declaration": true,
     "jsx": "react",
     "jsxFactory": "h",
-    "lib": [
-      "esnext",
-      "dom"
-    ],
+    "lib": ["ES2018", "DOM"],
     /* Strict Type-Checking Options */
     "strict": true,
     /* Additional Checks */
@@ -25,7 +22,8 @@
     /* Report error when not all code paths in function return a value. */
     "noImplicitReturns": true,
     /* Report errors for fallthrough cases in switch statement. */
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "skipLibCheck": true
   },
   "include": [
     "src/**/*"
