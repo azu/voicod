@@ -1,0 +1,11 @@
+.cm-wrap {
+    height: 300px;
+    border: 1px solid silver
+}
+
+.cm-line{
+    white-space: normal;
+}
+.cm-scroller {
+    overflow: auto;
+}
