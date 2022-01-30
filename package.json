@@ -25,7 +25,7 @@
     "clean": "yarn workspaces run clean",
     "prettier": "prettier --write \"**/*.{js,jsx,ts,tsx,css}\"",
     "test": "yarn workspaces run test",
-    "netlify": "cd packages/ui/ && yarn run build"
+    "website": "cd packages/ui/ && yarn run build"
   },
   "husky": {
     "hooks": {
