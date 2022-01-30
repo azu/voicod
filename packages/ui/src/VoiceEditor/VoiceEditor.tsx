@@ -10,12 +10,11 @@ export const VoiceEditor = () => {
     let editorView: EditorView;
     useEffect(() => {
         const editorState = EditorState.create({
-            doc: "", extensions: [
-                basicSetup
-            ]
+            doc: "",
+            extensions: [basicSetup],
         });
         editorView = new EditorView({
-            state: editorState
+            state: editorState,
         });
         ref.current?.appendChild(editorView.dom);
         VoiceEditorState.onChange(() => {
@@ -27,9 +26,9 @@ export const VoiceEditor = () => {
                 changes: state.addingSentences.map((sentence) => {
                     return {
                         from: editorView.state.selection.ranges[0].to,
-                        insert: sentence.toSentence()
+                        insert: sentence.toSentence(),
                     };
-                })
+                }),
             });
             editorView.dispatch(transaction);
             cursorLineDown(editorView);
@@ -41,5 +40,5 @@ export const VoiceEditor = () => {
             ref.current?.remove();
         };
     }, []);
-    return <div className={"VoiceEditor"} ref={ref}/>;
+    return <div className={"VoiceEditor"} ref={ref} />;
 };

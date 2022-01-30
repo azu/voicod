@@ -43,5 +43,5 @@ export const wrapPredableStore = <T>(createStore: T): T => {
             ...store,
         });
     };
-    return (wrappedSelector as any) as T;
+    return wrappedSelector as any as T;
 };

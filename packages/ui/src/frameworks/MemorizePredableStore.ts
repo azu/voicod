@@ -27,7 +27,7 @@ export const createMemorizedSelectFromGet = <T>(get: () => T): PrediableStore<T>
         const domainValues = Object.values(domainContainer);
         const cacheKey = getCompositeSymbol(...domainValues);
         if (cacheMap.has(cacheKey)) {
-            return (cacheMap.get(cacheKey) as any) as R;
+            return cacheMap.get(cacheKey) as any as R;
         }
         const selectedState = userSelector(domainContainer);
         cacheMap.set(cacheKey, selectedState as any);
@@ -44,7 +44,7 @@ export const memorizePredableStore = <T>(store: PrediableStore<T>): PrediableSto
         const cacheKey = getCompositeSymbol(...domainValues, userSelector);
         if (cacheMap.has(cacheKey)) {
             log(`${store.name ? "[" + store.name + "]" : ""} No update state`);
-            return (cacheMap.get(cacheKey) as any) as R;
+            return cacheMap.get(cacheKey) as any as R;
         }
         const selectedState = userSelector(domainContainer);
         log(`${store.name ? "[" + store.name + "]" : ""} Update state`, selectedState);

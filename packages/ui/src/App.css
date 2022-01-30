@@ -1,9 +1,9 @@
 .cm-wrap {
     height: 300px;
-    border: 1px solid silver
+    border: 1px solid silver;
 }
 
-.cm-line{
+.cm-line {
     white-space: normal;
 }
 .cm-scroller {
