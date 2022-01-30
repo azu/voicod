@@ -18,17 +18,12 @@ export const createVoiceUIStore = (infra = { speakerRepository }) => {
     };
     return {
         name: "VoiceUIStore",
-        // @Cost: middle
         get,
-        // @Cost: middle
         select,
-        // @Cost, middle
         onChange,
     };
 };
-// @Cost: low
 export const store = memorizePredableStore(createVoiceUIStore());
-// @Cost: high
 export const getState = () => {
     return {
         // lastSpeak: store.select(({ speaker }) => speaker?.memory ?? 0)

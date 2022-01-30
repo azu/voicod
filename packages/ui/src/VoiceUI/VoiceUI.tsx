@@ -3,6 +3,7 @@ import { useCallback, useEffect, useState } from "preact/hooks";
 import { speakerSpeakSentenceUseCase } from "./SpeakerSpeakSentenceUseCase";
 import type { SpeechRecognition } from "./SpeechRecognition";
 import { useTabVisibility } from "./use-tab-visibility";
+import { useTabFocus } from "./use-tab-focus";
 
 export type VoiceUIStatus = "user-want-to-stop" | "pause" | "processing" | "error";
 export type VoiceUIProps = {
@@ -16,6 +17,7 @@ export const VoiceUI = (_props: VoiceUIProps) => {
     const [recognition, setRecognition] = useState<SpeechRecognition | null>(null);
     const [text, setText] = useState("");
     const visible = useTabVisibility();
+    const tabFocus = useTabFocus();
     useEffect(() => {
         // 参考: https://jellyware.jp/kurage/iot/webspeechapi.html
         const lang = "ja-JP";
@@ -83,6 +85,13 @@ export const VoiceUI = (_props: VoiceUIProps) => {
             recognition?.stop();
         };
     }, [visible]);
+    useEffect(() => {
+        if (tabFocus && status !== "processing") {
+            console.log("reactive");
+            setStatus("processing");
+            recognition?.start();
+        }
+    }, [tabFocus]);
     const onClickToggleButton = useCallback(() => {
         if (status === "processing") {
             setStatus("user-want-to-stop");

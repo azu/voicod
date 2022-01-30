@@ -21,14 +21,13 @@ export const useTabVisibility = () => {
         // @ts-ignore
         return !document[hidden];
     }, []);
-
     const [visible, setVisible] = useState(getVisibility());
     const handleVisibility = useCallback(() => setVisible(getVisibility()), [setVisible]);
-
     useEffect(() => {
         document.addEventListener(visibilityChange, handleVisibility, false);
-
-        return () => document.removeEventListener(visibilityChange, handleVisibility);
+        return () => {
+            document.removeEventListener(visibilityChange, handleVisibility);
+        };
     }, [handleVisibility]);
 
     return visible;
