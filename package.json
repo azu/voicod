@@ -21,6 +21,7 @@
     "packages/*"
   ],
   "scripts": {
+    "dev": "yarn workspaces run dev",
     "build": "yarn workspaces run build",
     "clean": "yarn workspaces run clean",
     "prettier": "prettier --write \"**/*.{js,jsx,ts,tsx,css}\"",
