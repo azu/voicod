@@ -1,11 +1,23 @@
+html,
+body,
+#app,
+.main {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 .cm-wrap {
-    height: 300px;
+    height: 100%;
     border: 1px solid silver;
 }
 
 .cm-line {
     white-space: normal;
 }
+
 .cm-scroller {
-    overflow: auto;
+    overflow: s;
 }

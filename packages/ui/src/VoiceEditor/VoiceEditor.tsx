@@ -1,22 +1,35 @@
 import { createRef, h } from "preact";
-import { useEffect } from "preact/hooks";
+import { useCallback, useEffect } from "preact/hooks";
 import { updateSpokenSentenceUseCase } from "./UpdateSpokenSentenceUseCase";
 import * as VoiceEditorState from "./VoiceEditorState";
 import { basicSetup, EditorState, EditorView } from "@codemirror/basic-setup";
-import { cursorLineDown } from "@codemirror/commands";
+import { cursorDocEnd, cursorLineDown } from "@codemirror/commands";
+import { useLocalStorage } from "../hooks/useLocalStorage";
+import type { JSXInternal } from "preact/src/jsx";
 
-export const VoiceEditor = () => {
+export type VoiceEditorProps = JSXInternal.HTMLAttributes<HTMLDivElement>;
+export const VoiceEditor = (props: VoiceEditorProps) => {
+    const { ...divProps } = props;
+    const [storage, setStorage] = useLocalStorage("VoiceEditor", "");
     const ref = createRef();
     let editorView: EditorView;
+    const updateListenerExtension = useCallback(() => {
+        return EditorView.updateListener.of((update) => {
+            if (update.docChanged) {
+                setStorage(update.state.doc.toString());
+            }
+        });
+    }, []);
     useEffect(() => {
         const editorState = EditorState.create({
-            doc: "",
-            extensions: [basicSetup],
+            doc: storage,
+            extensions: [basicSetup, updateListenerExtension()],
         });
         editorView = new EditorView({
             state: editorState,
         });
         ref.current?.appendChild(editorView.dom);
+        cursorDocEnd(editorView); // move to end of doc
         VoiceEditorState.onChange(() => {
             const state = VoiceEditorState.getState();
             if (!state.hasAddingSentences) {
@@ -40,5 +53,5 @@ export const VoiceEditor = () => {
             ref.current?.remove();
         };
     }, []);
-    return <div className={"VoiceEditor"} ref={ref} />;
+    return <div className={"VoiceEditor"} ref={ref} {...divProps} />;
 };
