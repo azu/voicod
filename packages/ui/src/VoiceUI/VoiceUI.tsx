@@ -69,17 +69,22 @@ export const VoiceUI = (props: VoiceUIProps) => {
             console.info("[speech] onspeechend");
             setStatus("pause");
         };
-        _recognition.onresult = function (event: any) {
-            const results = event.results;
+        _recognition.onresult = function (event) {
+            const results = Array.from(event.results);
             console.log(event.resultIndex, results);
-            for (let i = event.resultIndex; i < results.length; i++) {
-                if (results[i].isFinal) {
-                    const result_transcript = results[i][0].transcript;
-                    setText(result_transcript);
-                    speakerSpeakSentenceUseCase().execute(result_transcript);
-                } else {
-                    setText(results[i][0].transcript);
-                }
+            // continuousの時は、前回の要素もeventに入ってる
+            // 最後のresultが現在の最新のものとして扱う
+            const lastResult = results[results.length - 1];
+            const isCurrentProcessFinish = lastResult.isFinal;
+            if (isCurrentProcessFinish) {
+                setText(lastResult[0].transcript);
+                speakerSpeakSentenceUseCase().execute(lastResult[0].transcript);
+            } else {
+                // 処理中のテキスト
+                const restResults = results.slice(event.resultIndex);
+                const processingResults = restResults.filter((result) => !result.isFinal);
+                const processingText = processingResults.map((result) => result[0].transcript).join("");
+                setText(processingText);
             }
         };
         setRecognition(_recognition);
