@@ -13,11 +13,12 @@ export type SpeakerProps = {
 };
 
 export class Speaker implements SpeakerProps {
-    id!: SpeakerId;
-    memory!: SpeakerMemory;
+    id: SpeakerId;
+    memory: SpeakerMemory;
 
     constructor(props: SpeakerProps) {
-        Object.assign(this, props);
+        this.id = props.id;
+        this.memory = props.memory;
     }
 
     speak(sentence: Sentence) {

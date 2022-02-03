@@ -4,7 +4,7 @@ const vcommand = (value: string) => {
     if (/(改行|開業|かいぎょう)$/.test(value)) {
         return value.replace(/(改行|開業|かいぎょう)$/, "\n");
     }
-    return value + "。" + "\n";
+    return value + "\n";
 };
 
 export class Sentence {
