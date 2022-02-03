@@ -13,8 +13,18 @@ export default defineConfig({
                 lang: "ja-JP",
                 icons: [
                     {
-                        src: "https://voicod.pages.dev/icon.png",
+                        src: "https://voicod.pages.dev/voicodx192.png",
+                        sizes: "192x192",
+                        type: "image/png",
+                    },
+                    {
+                        src: "https://voicod.pages.dev/voicod.png",
                         sizes: "256x256",
+                        type: "image/png",
+                    },
+                    {
+                        src: "https://voicod.pages.dev/voicodx512.png",
+                        sizes: "512x512",
                         type: "image/png",
                     },
                 ],
