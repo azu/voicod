@@ -4,12 +4,12 @@
   "display": "fullscreen",
   "icons": [
     {
-      "src": "icon/icon.png",
+      "src": "https://voicod.pages.dev/icon/icon.png",
       "sizes": "256x256",
       "type": "image/png"
     }
   ],
   "name": "Voicod",
   "short_name": "voicod",
-  "start_url": "/"
+  "start_url": "https://voicod.pages.dev/"
 }
