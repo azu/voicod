@@ -8,6 +8,7 @@ export default defineConfig({
         VitePWA({
             manifest: {
                 background_color: "white",
+                theme_color: "white",
                 description: "Voice note editor",
                 display: "fullscreen",
                 lang: "ja-JP",
