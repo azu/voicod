@@ -58,6 +58,7 @@
     "@codemirror/commands": "^0.19.8",
     "composite-symbol": "^1.0.2",
     "eventmit": "^1.1.0",
+    "lint-staged": "^12.3.2",
     "preact": "^10.6.5",
     "ulid": "^2.3.0"
   }
