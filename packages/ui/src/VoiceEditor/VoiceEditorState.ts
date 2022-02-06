@@ -1,9 +1,10 @@
 import { speakerRepository } from "../infra/SpeakerRepository";
 import { memorizePredableStore } from "../frameworks/MemorizePredableStore";
+import { vEditorRepository } from "../infra/VEditorRepository";
 
-export const createEditorStore = (infra = { speakerRepository }) => {
+export const createEditorStore = (infra = { speakerRepository, vEditorRepository }) => {
     const get = () => {
-        return { speaker: infra.speakerRepository.read() };
+        return { speaker: infra.speakerRepository.read(), vEditor: infra.vEditorRepository.read() };
     };
     const select = <R>(selector: (domains: ReturnType<typeof get>) => R): R => {
         return selector(get());
@@ -27,12 +28,13 @@ export const createEditorStore = (infra = { speakerRepository }) => {
     };
 };
 // @Cost: low
-export const store = memorizePredableStore(createEditorStore());
+const editorStore = memorizePredableStore(createEditorStore());
 // @Cost: high
-export const getState = () => {
+export const getState = (store = editorStore) => {
     return {
+        editorText: store.select(({ vEditor }) => vEditor?.text ?? ""),
         hasAddingSentences: store.select(({ speaker }) => speaker?.memory.hasMemory ?? false),
         addingSentences: store.select(({ speaker }) => speaker?.memory.sentences ?? []),
     };
 };
-export const onChange = store.onChange;
+export const onChange = editorStore.onChange;

@@ -1,10 +1,12 @@
 import { h } from "preact";
-import { useCallback, useEffect, useState } from "preact/hooks";
+import { useCallback, useEffect, useRef, useState } from "preact/hooks";
 import { speakerSpeakSentenceUseCase } from "./SpeakerSpeakSentenceUseCase";
 import type { SpeechRecognition } from "./SpeechRecognition";
 import { useTabVisibility } from "../hooks/use-tab-visibility";
 import { useTabFocus } from "../hooks/use-tab-focus";
 import type { JSXInternal } from "preact/src/jsx";
+import { useStore } from "../hooks/useStore";
+import * as voiceEditorState from "../VoiceEditor/VoiceEditorState";
 
 export type VoiceUIStatus = "user-want-to-stop" | "pause" | "processing" | "error";
 
@@ -17,8 +19,9 @@ export type VoiceUIProps = {
 export const VoiceUI = (props: VoiceUIProps) => {
     const { forever, ...divProps } = props;
     const [status, setStatus] = useState<VoiceUIStatus>("pause");
-    const [recognition, setRecognition] = useState<SpeechRecognition | null>(null);
+    const recognitionRef = useRef<SpeechRecognition>();
     const [text, setText] = useState("");
+    const editorState = useStore(voiceEditorState);
     const visible = useTabVisibility();
     const tabFocus = useTabFocus();
     useEffect(() => {
@@ -40,7 +43,7 @@ export const VoiceUI = (props: VoiceUIProps) => {
         _recognition.continuous = true;
         _recognition.onsoundstart = function () {
             console.info("[speech] onsoundstart");
-            setStatus("pause");
+            setStatus("processing");
         };
         _recognition.onnomatch = function () {
             console.info("[speech] onnomatch");
@@ -71,7 +74,6 @@ export const VoiceUI = (props: VoiceUIProps) => {
         };
         _recognition.onresult = function (event) {
             const results = Array.from(event.results);
-            console.log(event.resultIndex, results);
             // continuousの時は、前回の要素もeventに入ってる
             // 最後のresultが現在の最新のものとして扱う
             const lastResult = results[results.length - 1];
@@ -87,39 +89,51 @@ export const VoiceUI = (props: VoiceUIProps) => {
                 setText(processingText);
             }
         };
-        setRecognition(_recognition);
-        if (visible) {
-            _recognition.start();
-            setStatus("processing");
-        } else {
-            _recognition.stop();
-        }
+        recognitionRef.current = _recognition;
+        console.log("visible", visible);
+        setStatus("processing");
+        _recognition.start();
         return () => {
-            recognition?.stop();
+            _recognition?.stop();
         };
     }, [visible]);
     useEffect(() => {
-        if (tabFocus && status !== "processing") {
+        const shouldPlay = visible || tabFocus;
+        console.log("status", status);
+        if (shouldPlay && status !== "processing") {
             console.log("reactive");
-            setStatus("processing");
-            recognition?.start();
+            try {
+                recognitionRef.current?.start();
+                setStatus("processing");
+            } catch {
+                /* nope */
+            }
         }
-    }, [tabFocus]);
+    }, [status, tabFocus, visible]);
     const onClickToggleButton = useCallback(() => {
         if (status === "processing") {
             setStatus("user-want-to-stop");
-            recognition?.stop();
+            recognitionRef.current?.stop();
         } else {
             setStatus("processing");
-            recognition?.start();
+            recognitionRef.current?.start();
         }
-    }, [recognition, status]);
+    }, [status]);
+    const click = useCallback(() => {
+        window.open(
+            `postem://?url=${encodeURIComponent(window.location.href)}&title=${encodeURIComponent(
+                editorState.editorText
+            )}`,
+            "_blank"
+        );
+    }, [editorState]);
     return (
         <div class={"VoiceUI"} {...divProps}>
             <div style={{ display: "flex", height: "1em", alignItems: "center", gap: "4px" }}>
                 <button class={"VoiceUI-toggleButton"} onClick={onClickToggleButton}>
                     {status === "processing" ? "Stop" : "Start"}
                 </button>
+                <a onClick={click}>link</a>
                 <p class={"VoiceUI-status"}>Status: {status}</p>
             </div>
             <p class={"VoiceUI-text"}>{text}</p>

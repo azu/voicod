@@ -8,7 +8,7 @@ export type PrediableStore<
     name?: string;
     get(): Domain;
     select<R>(selector: (domain: Domain) => R): R;
-    onChange(changeHandler: () => void): void;
+    onChange(changeHandler: () => void): () => void;
 };
 
 type InfraParameter = {

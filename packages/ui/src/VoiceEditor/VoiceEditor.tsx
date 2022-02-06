@@ -1,57 +1,70 @@
-import { createRef, h } from "preact";
-import { useCallback, useEffect } from "preact/hooks";
+import { h } from "preact";
+import { useCallback, useEffect, useRef } from "preact/hooks";
 import { updateSpokenSentenceUseCase } from "./UpdateSpokenSentenceUseCase";
 import * as VoiceEditorState from "./VoiceEditorState";
 import { basicSetup, EditorState, EditorView } from "@codemirror/basic-setup";
 import { cursorDocEnd, cursorLineDown } from "@codemirror/commands";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import type { JSXInternal } from "preact/src/jsx";
+// import { updateVoiceEditorTextUseCase } from "./UpdateVoiceEditorTextUseCase";
+import { useStore } from "../hooks/useStore";
+import { updateVoiceEditorTextUseCase } from "./UpdateVoiceEditorTextUseCase";
 
 export type VoiceEditorProps = JSXInternal.HTMLAttributes<HTMLDivElement>;
 export const VoiceEditor = (props: VoiceEditorProps) => {
     const { ...divProps } = props;
     const [storage, setStorage] = useLocalStorage("VoiceEditor", "");
-    const ref = createRef();
-    let editorView: EditorView;
+    const divRef = useRef<HTMLDivElement>(null);
+    const editorViewRef = useRef<EditorView>();
     const updateListenerExtension = useCallback(() => {
         return EditorView.updateListener.of((update) => {
             if (update.docChanged) {
-                setStorage(update.state.doc.toString());
+                const text = update.state.doc.toString();
+                setStorage(text);
+                updateVoiceEditorTextUseCase(text);
             }
         });
-    }, []);
+    }, []); // eslint-disable-line
     useEffect(() => {
         const editorState = EditorState.create({
             doc: storage,
             extensions: [basicSetup, updateListenerExtension()],
         });
-        editorView = new EditorView({
+        // updateVoiceEditorTextUseCase(storage);
+        const editorView = new EditorView({
             state: editorState,
         });
-        ref.current?.appendChild(editorView.dom);
+        const refCurrent = divRef.current;
+        refCurrent?.appendChild(editorView.dom);
         cursorDocEnd(editorView); // move to end of doc
-        VoiceEditorState.onChange(() => {
-            const state = VoiceEditorState.getState();
-            if (!state.hasAddingSentences) {
-                return;
-            }
-            const transaction = editorView.state.update({
-                changes: state.addingSentences.map((sentence) => {
-                    return {
-                        from: editorView.state.selection.ranges[0].to,
-                        insert: sentence.toSentence(),
-                    };
-                }),
-            });
-            editorView.dispatch(transaction);
-            cursorLineDown(editorView);
-            updateSpokenSentenceUseCase().execute(state.addingSentences);
-        });
         editorView.focus();
+        editorViewRef.current = editorView;
         return () => {
             editorView.destroy();
-            ref.current?.remove();
+            refCurrent?.remove();
         };
-    }, []);
-    return <div className={"VoiceEditor"} ref={ref} {...divProps} />;
+    }, [updateListenerExtension]); // eslint-disable-line -- storage at first
+    const voiceEditorState = useStore(VoiceEditorState);
+    useEffect(() => {
+        if (!voiceEditorState.hasAddingSentences) {
+            return;
+        }
+        const editorView = editorViewRef.current;
+        if (!editorView) {
+            return;
+        }
+        console.log("editorView", editorView);
+        const transaction = editorView.state.update({
+            changes: voiceEditorState.addingSentences.map((sentence) => {
+                return {
+                    from: editorView.state.selection.ranges[0].to,
+                    insert: sentence.toSentence(),
+                };
+            }),
+        });
+        editorView.dispatch(transaction);
+        cursorLineDown(editorView);
+        updateSpokenSentenceUseCase().execute(voiceEditorState.addingSentences);
+    }, [voiceEditorState]);
+    return <div className={"VoiceEditor"} ref={divRef} {...divProps} />;
 };

@@ -11,7 +11,7 @@ export const useTabFocus = () => {
             document.removeEventListener("blur", onBlur);
             document.removeEventListener("focus", onFocus);
         };
-    }, []);
+    }, [onBlur, onFocus]);
 
     return hasFocus;
 };
