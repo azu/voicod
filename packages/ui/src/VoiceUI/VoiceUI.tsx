@@ -1,5 +1,5 @@
 import { h } from "preact";
-import { useCallback, useEffect, useRef, useState } from "preact/hooks";
+import { useCallback, useEffect, useMemo, useRef, useState } from "preact/hooks";
 import { speakerSpeakSentenceUseCase } from "./SpeakerSpeakSentenceUseCase";
 import type { SpeechRecognition } from "./SpeechRecognition";
 import { useTabVisibility } from "../hooks/use-tab-visibility";
@@ -7,6 +7,7 @@ import { useTabFocus } from "../hooks/use-tab-focus";
 import type { JSXInternal } from "preact/src/jsx";
 import { useStore } from "../hooks/useStore";
 import * as voiceEditorState from "../VoiceEditor/VoiceEditorState";
+import { createXCallback } from "./modules/xCallbackUrl";
 
 export type VoiceUIStatus = "user-want-to-stop" | "pause" | "processing" | "error";
 
@@ -21,6 +22,7 @@ export const VoiceUI = (props: VoiceUIProps) => {
     const [status, setStatus] = useState<VoiceUIStatus>("pause");
     const recognitionRef = useRef<SpeechRecognition>();
     const [text, setText] = useState("");
+    const xCallback = useMemo(() => createXCallback(window.location.href), []);
     const editorState = useStore(voiceEditorState);
     const visible = useTabVisibility();
     const tabFocus = useTabFocus();
@@ -81,6 +83,7 @@ export const VoiceUI = (props: VoiceUIProps) => {
             if (isCurrentProcessFinish) {
                 setText(lastResult[0].transcript);
                 speakerSpeakSentenceUseCase().execute(lastResult[0].transcript);
+                xCallback.isOnetime && xCallback.success(lastResult[0].transcript);
             } else {
                 // 処理中のテキスト
                 const restResults = results.slice(event.resultIndex);
@@ -90,13 +93,12 @@ export const VoiceUI = (props: VoiceUIProps) => {
             }
         };
         recognitionRef.current = _recognition;
-        console.log("visible", visible);
         setStatus("processing");
         _recognition.start();
         return () => {
             _recognition?.stop();
         };
-    }, [visible]);
+    }, [visible, xCallback]);
     useEffect(() => {
         const shouldPlay = visible || tabFocus;
         console.log("status", status);
@@ -119,22 +121,25 @@ export const VoiceUI = (props: VoiceUIProps) => {
             recognitionRef.current?.start();
         }
     }, [status]);
-    const click = useCallback(() => {
-        window.open(
-            `postem://?url=${encodeURIComponent(window.location.href)}&title=${encodeURIComponent(
-                editorState.editorText
-            )}`,
-            "_blank"
-        );
-    }, [editorState]);
+    const onSuccessButton = useCallback(() => {
+        xCallback.success(editorState.editorText);
+    }, [editorState.editorText, xCallback]);
+    const onCancelButton = useCallback(() => {
+        xCallback.cancel();
+    }, [xCallback]);
     return (
         <div class={"VoiceUI"} {...divProps}>
-            <div style={{ display: "flex", height: "1em", alignItems: "center", gap: "4px" }}>
-                <button class={"VoiceUI-toggleButton"} onClick={onClickToggleButton}>
-                    {status === "processing" ? "Stop" : "Start"}
-                </button>
-                <a onClick={click}>link</a>
-                <p class={"VoiceUI-status"}>Status: {status}</p>
+            <div style={{ display: "flex", height: "1em", alignItems: "center", gap: "4px", padding: "0 4px" }}>
+                <div style={{ display: "inline-flex", alignItems: "center", gap: "4px", flex: 1 }}>
+                    <button class={"VoiceUI-toggleButton"} onClick={onClickToggleButton} style={{ width: "60px" }}>
+                        {status === "processing" ? "Stop" : "Start"}
+                    </button>
+                    <p class={"VoiceUI-status"}>Status: {status}</p>
+                </div>
+                <div style={{ display: "inline-block" }}>
+                    {xCallback.hasCallback("success") && <button onClick={onSuccessButton}>OK</button>}
+                    {xCallback.hasCallback("cancel") && <button onClick={onCancelButton}>Cancel</button>}
+                </div>
             </div>
             <p class={"VoiceUI-text"}>{text}</p>
         </div>

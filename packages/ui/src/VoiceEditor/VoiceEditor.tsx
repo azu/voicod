@@ -30,7 +30,7 @@ export const VoiceEditor = (props: VoiceEditorProps) => {
             doc: storage,
             extensions: [basicSetup, updateListenerExtension()],
         });
-        // updateVoiceEditorTextUseCase(storage);
+        updateVoiceEditorTextUseCase(storage);
         const editorView = new EditorView({
             state: editorState,
         });
@@ -53,7 +53,6 @@ export const VoiceEditor = (props: VoiceEditorProps) => {
         if (!editorView) {
             return;
         }
-        console.log("editorView", editorView);
         const transaction = editorView.state.update({
             changes: voiceEditorState.addingSentences.map((sentence) => {
                 return {

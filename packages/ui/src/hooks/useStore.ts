@@ -10,6 +10,7 @@ export const useStore = <T>(store: Store<T>) => {
         const unListen = store.onChange(() => {
             setState(store.getState());
         });
+        setState(store.getState());
         return () => {
             unListen();
         };

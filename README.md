@@ -4,9 +4,34 @@ Voice note editor
 
 ## Usage
 
-- Open <https://voicod.pages.dev//>
+- Open <https://voicod.pages.dev/>
 
 :memo: Require [SpeechRecognition](https://developer.mozilla.org/docs/Web/API/SpeechRecognition/SpeechRecognition) API supported browser like Google Chrome
+
+## `x-callback` support
+
+Voicod support `x-callback-url`.
+
+- [1.0 DRAFT Spec | x-callback-url](http://x-callback-url.com/specifications/)
+
+Parameters
+
+- `x-success=<encoed url>`: open the url when click "OK" button
+    - Pass the text as `result` parameter
+    - Also, `{{reuslt}}` placeholder will be replaced the text
+- `x-cancel=<encoed url>`: open the url when click "Cancel" button
+- `x-error=<encoed url>`: open the url when occur error
+- `x-onetime`: when `x-onetime` is passed, open the `x-success`'s url automatically
+
+Examples:
+
+```
+https://voicod.pages.dev/x-success=https%3A%2F%2Fgithub.com%2Fazu%2Fvoicod%2Fissues%2Fnew%3Ftitle%3D%7B%7Bresult%7D%7D
+// → Open "https://github.com/azu/voicod/issues/new?title={{result}}" when click "OK" button
+https://voicod.pages.dev/?x-onetime&x-success=https%3A%2F%2Fgithub.com%2Fazu%2Fvoicod%2Fissues%2Fnew%3Ftitle%3D%7B%7Bresult%7D%7D
+// → Open "https://github.com/azu/voicod/issues/new?title={{result}}" after input your voice
+```
+
 
 ## Changelog
 

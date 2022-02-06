@@ -1,5 +1,4 @@
 import getCompositeSymbol from "composite-symbol";
-import { log } from "./Logger";
 import { PrediableStore } from "./PredableState";
 
 function assertIsSelector<T>(val: any): asserts val is PrediableStore<T> {
@@ -43,11 +42,11 @@ export const memorizePredableStore = <T>(store: PrediableStore<T>): PrediableSto
         const domainValues = Object.values(domainContainer);
         const cacheKey = getCompositeSymbol(...domainValues, userSelector);
         if (cacheMap.has(cacheKey)) {
-            log(`${store.name ? "[" + store.name + "]" : ""} No update state`);
+            // log(`${store.name ? "[" + store.name + "]" : ""} No update state`);
             return cacheMap.get(cacheKey) as any as R;
         }
         const selectedState = userSelector(domainContainer);
-        log(`${store.name ? "[" + store.name + "]" : ""} Update state`, selectedState);
+        // log(`${store.name ? "[" + store.name + "]" : ""} Update state`, selectedState);
         cacheMap.set(cacheKey, selectedState as any);
         return selectedState;
     };
