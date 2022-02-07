@@ -31,7 +31,7 @@ export default defineConfig({
                 ],
                 name: "Voicod",
                 short_name: "voicod",
-                start_url: "/",
+                start_url: ".",
             },
         }),
     ],
