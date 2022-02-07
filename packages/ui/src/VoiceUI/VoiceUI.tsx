@@ -8,8 +8,10 @@ import type { JSXInternal } from "preact/src/jsx";
 import { useStore } from "../hooks/useStore";
 import * as voiceEditorState from "../VoiceEditor/VoiceEditorState";
 import { createXCallback } from "./modules/xCallbackUrl";
+import SiriWave from "siriwave";
+import "./VoiceUI.css";
 
-export type VoiceUIStatus = "user-want-to-stop" | "pause" | "processing" | "error";
+export type VoiceUIStatus = "pause" | "processing" | "error";
 
 // https://github.com/1heisuzuki/speech-to-text-webcam-overlay/blob/master/index.html
 const _SpeechRecognition =
@@ -20,12 +22,31 @@ export type VoiceUIProps = {
 export const VoiceUI = (props: VoiceUIProps) => {
     const { forever, ...divProps } = props;
     const [status, setStatus] = useState<VoiceUIStatus>("pause");
+    const [userWantToStop, setUserWantToStop] = useState<boolean>(false);
     const recognitionRef = useRef<SpeechRecognition>();
     const [text, setText] = useState("");
     const xCallback = useMemo(() => createXCallback(window.location.href), []);
     const editorState = useStore(voiceEditorState);
     const visible = useTabVisibility();
     const tabFocus = useTabFocus();
+    const siriRef = useRef<HTMLDivElement>(null);
+    const [siriWave, setSiriWave] = useState<SiriWave>();
+    useEffect(() => {
+        if (!siriRef.current) {
+            return;
+        }
+        if (siriWave) {
+            return;
+        }
+        setSiriWave(
+            new SiriWave({
+                container: siriRef.current,
+                style: "ios9",
+                width: 320,
+                height: 30,
+            })
+        );
+    }, [siriRef, siriWave]);
     useEffect(() => {
         // 参考: https://jellyware.jp/kurage/iot/webspeechapi.html
         const lang = "ja-JP";
@@ -102,7 +123,7 @@ export const VoiceUI = (props: VoiceUIProps) => {
     useEffect(() => {
         const shouldPlay = visible || tabFocus;
         console.log("status", status);
-        if (shouldPlay && status !== "processing") {
+        if (shouldPlay && status === "pause" && !userWantToStop) {
             console.log("reactive");
             try {
                 recognitionRef.current?.start();
@@ -111,12 +132,21 @@ export const VoiceUI = (props: VoiceUIProps) => {
                 /* nope */
             }
         }
-    }, [status, tabFocus, visible]);
+    }, [status, tabFocus, userWantToStop, visible]);
+    useEffect(() => {
+        if (status === "processing") {
+            siriWave?.start();
+        } else {
+            siriWave?.stop();
+        }
+    }, [siriWave, status]);
     const onClickToggleButton = useCallback(() => {
         if (status === "processing") {
-            setStatus("user-want-to-stop");
+            setUserWantToStop(true);
+            setStatus("pause");
             recognitionRef.current?.stop();
         } else {
+            setUserWantToStop(false);
             setStatus("processing");
             recognitionRef.current?.start();
         }
@@ -129,9 +159,9 @@ export const VoiceUI = (props: VoiceUIProps) => {
     }, [xCallback]);
     return (
         <div class={"VoiceUI"} {...divProps}>
-            <div style={{ display: "flex", height: "1em", alignItems: "center", gap: "4px", padding: "0 4px" }}>
-                <div style={{ display: "inline-flex", alignItems: "center", gap: "4px", flex: 1 }}>
-                    <button class={"VoiceUI-toggleButton"} onClick={onClickToggleButton} style={{ width: "60px" }}>
+            <div style={{ display: "flex", height: "1em", alignItems: "center", gap: "16px" }}>
+                <div style={{ display: "inline-flex", alignItems: "center", gap: "8px", flex: 1 }}>
+                    <button class={"VoiceUI-toggleButton"} onClick={onClickToggleButton}>
                         {status === "processing" ? "Stop" : "Start"}
                     </button>
                     <p class={"VoiceUI-status"}>Status: {status}</p>
@@ -142,6 +172,7 @@ export const VoiceUI = (props: VoiceUIProps) => {
                 </div>
             </div>
             <p class={"VoiceUI-text"}>{text}</p>
+            <div ref={siriRef} class={"VoiceUI-bar"} />
         </div>
     );
 };

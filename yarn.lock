@@ -3569,6 +3569,11 @@ signal-exit@^3.0.2, signal-exit@^3.0.3:
   resolved "https://registry.yarnpkg.com/signal-exit/-/signal-exit-3.0.7.tgz#a9a1767f8af84155114eaabd73f99273c8f59ad9"
   integrity sha512-wnD2ZE+l+SPC/uoS0vXeE9L1+0wuaMqKlfz9AMUo38JsyLSBWSFcHR1Rri62LZc12vLr1gb3jl7iwQhgwpAbGQ==
 
+siriwave@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/siriwave/-/siriwave-2.3.0.tgz#be76da79cd834da0135bee454e33d0b92aad46db"
+  integrity sha512-p/257wib0UPvbI8ZWkm5CrPNlQ9FhLoWLyA+HWLnBCYYRG9/p8UQ4J53o+oPqXaQMjII0svnno8wAgcmQYI+NA==
+
 slash@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/slash/-/slash-3.0.0.tgz#6539be870c165adbd5240220dbe361f1bc4d4634"
