@@ -4,7 +4,9 @@
     background-color: rgb(34, 39, 46);
 }
 
-.VoiceUI-toggleButton {
+.VoiceUI-toggleButton,
+.VoiceUI-successButton,
+.VoiceUI-cancelButton {
     border: none;
     font-size: 16px;
     border-radius: 4px;

@@ -167,8 +167,16 @@ export const VoiceUI = (props: VoiceUIProps) => {
                     <p class={"VoiceUI-status"}>Status: {status}</p>
                 </div>
                 <div style={{ display: "inline-block" }}>
-                    {xCallback.hasCallback("success") && <button onClick={onSuccessButton}>OK</button>}
-                    {xCallback.hasCallback("cancel") && <button onClick={onCancelButton}>Cancel</button>}
+                    {xCallback.hasCallback("success") && (
+                        <button onClick={onSuccessButton} class={"VoiceUI-successButton"}>
+                            OK
+                        </button>
+                    )}
+                    {xCallback.hasCallback("cancel") && (
+                        <button onClick={onCancelButton} class={"VoiceUI-cancelButton"}>
+                            Cancel
+                        </button>
+                    )}
                 </div>
             </div>
             <p class={"VoiceUI-text"}>{text}</p>

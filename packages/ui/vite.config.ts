@@ -6,6 +6,7 @@ export default defineConfig({
     plugins: [
         preact(),
         VitePWA({
+            registerType: "autoUpdate",
             manifest: {
                 background_color: "white",
                 theme_color: "white",
