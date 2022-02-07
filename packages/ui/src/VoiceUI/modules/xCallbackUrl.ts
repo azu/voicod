@@ -2,7 +2,7 @@ const normalizeCallbackUrl = (url: string | null) => {
     if (!url) {
         return null;
     }
-    return ["javascript", "vbscript"].includes(new URL(url).protocol) ? null : url;
+    return ["javascript:", "vbscript:"].includes(new URL(url).protocol) ? null : url;
 };
 export const createXCallback = (href: string) => {
     const url = new URL(href);
