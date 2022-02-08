@@ -22,10 +22,10 @@ Voicod support `x-callback-url`.
 Parameters
 
 - `x-success=<encoed url>`: open the url when click "OK" button
-    - Pass the text as `result` parameter
-    - Also, `{{reuslt}}` placeholder will be replaced the text
+  - `{{reuslt}}` placeholder will be replaced the result text
 - `x-cancel=<encoed url>`: open the url when click "Cancel" button
 - `x-error=<encoed url>`: open the url when occur error
+  - `{{errorMessage}}` placeholder will be replaced the error message
 - `x-onetime`: when `x-onetime` is passed, open the `x-success`'s url automatically
 
 Examples:

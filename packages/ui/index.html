@@ -9,5 +9,40 @@
 <body>
 <div id="app"></div>
 <script type="module" src="/src/main.tsx"></script>
+<script type="module">
+    /* Dynamic Manifest */
+    const manifest = {
+        background_color: "white",
+        theme_color: "white",
+        description: "Voice note editor",
+        display: "fullscreen",
+        lang: "ja-JP",
+        icons: [
+            {
+                src: "https://voicod.pages.dev/voicodx192.png",
+                sizes: "192x192",
+                type: "image/png"
+            },
+            {
+                src: "https://voicod.pages.dev/voicod.png",
+                sizes: "256x256",
+                type: "image/png"
+            },
+            {
+                src: "https://voicod.pages.dev/voicodx512.png",
+                sizes: "512x512",
+                type: "image/png"
+            }
+        ],
+        name: "Voicod",
+        short_name: "voicod",
+        start_url: location.href
+    };
+    document.querySelector(`link[rel="manifest"]`)?.remove();
+    const link = document.createElement("link");
+    link.rel = "manifest";
+    link.href = `data:application/manifest+json,${JSON.stringify(manifest)}`;
+    document.head.append(link);
+</script>
 </body>
 </html>
