@@ -29,7 +29,7 @@ export const createXCallback = (href: string) => {
             if (!xSuccess) {
                 throw new Error("x-success is not defined");
             }
-            const xSuccessUrl = new URL(xSuccess.replace("{{result}}", result));
+            const xSuccessUrl = new URL(xSuccess.replace("{{result}}", encodeURIComponent(result)));
             xSuccessUrl.searchParams.append("result", result);
             location.href = xSuccessUrl.toString();
         },
@@ -37,7 +37,7 @@ export const createXCallback = (href: string) => {
             if (!xError) {
                 throw new Error("x-error is not defined");
             }
-            const xErrorUrl = new URL(xError.replace("{{errorMessage}}", errorMessage));
+            const xErrorUrl = new URL(xError.replace("{{errorMessage}}", encodeURIComponent(errorMessage)));
             xErrorUrl.searchParams.append("errorMessage", errorMessage);
             location.href = xError.toString();
         },
