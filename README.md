@@ -8,6 +8,11 @@ Voice note editor
 
 :memo: Require [SpeechRecognition](https://developer.mozilla.org/docs/Web/API/SpeechRecognition/SpeechRecognition) API supported browser like Google Chrome
 
+## Parameters
+
+- `?noSave`: no use localStorage
+  - Do not load previous text, and do not write current text to storage
+
 ## `x-callback` support
 
 Voicod support `x-callback-url`.

@@ -1,5 +1,5 @@
 import { h } from "preact";
-import { useCallback, useEffect, useRef } from "preact/hooks";
+import { useCallback, useEffect, useMemo, useRef } from "preact/hooks";
 import { updateSpokenSentenceUseCase } from "./UpdateSpokenSentenceUseCase";
 import * as VoiceEditorState from "./VoiceEditorState";
 import { basicSetup, EditorState, EditorView } from "@codemirror/basic-setup";
@@ -9,6 +9,7 @@ import type { JSXInternal } from "preact/src/jsx";
 // import { updateVoiceEditorTextUseCase } from "./UpdateVoiceEditorTextUseCase";
 import { useStore } from "../hooks/useStore";
 import { updateVoiceEditorTextUseCase } from "./UpdateVoiceEditorTextUseCase";
+import { createAppMode } from "./modules/AppMode";
 
 export type VoiceEditorProps = JSXInternal.HTMLAttributes<HTMLDivElement>;
 export const VoiceEditor = (props: VoiceEditorProps) => {
@@ -16,18 +17,21 @@ export const VoiceEditor = (props: VoiceEditorProps) => {
     const [storage, setStorage] = useLocalStorage("VoiceEditor", "");
     const divRef = useRef<HTMLDivElement>(null);
     const editorViewRef = useRef<EditorView>();
+    const appMode = useMemo(() => createAppMode(window.location.href), []);
     const updateListenerExtension = useCallback(() => {
         return EditorView.updateListener.of((update) => {
             if (update.docChanged) {
                 const text = update.state.doc.toString();
-                setStorage(text);
+                if (!appMode.shouldNotSave) {
+                    setStorage(text);
+                }
                 updateVoiceEditorTextUseCase(text);
             }
         });
     }, []); // eslint-disable-line
     useEffect(() => {
         const editorState = EditorState.create({
-            doc: storage,
+            doc: appMode.shouldNotSave ? "" : storage,
             extensions: [basicSetup, updateListenerExtension()],
         });
         updateVoiceEditorTextUseCase(storage);
