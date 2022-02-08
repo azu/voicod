@@ -11,6 +11,13 @@
 <script type="module" src="/src/main.tsx"></script>
 <script type="module">
     /* Dynamic Manifest */
+    const url = new URL(location.href);
+    for (const [key, value] of url.searchParams.entries()) {
+        if (/^x-/.test(key)) {
+            // encode again
+            url.searchParams.set(key, encodeURIComponent(value));
+        }
+    }
     const manifest = {
         background_color: "white",
         theme_color: "white",
@@ -36,7 +43,7 @@
         ],
         name: "Voicod",
         short_name: "voicod",
-        start_url: location.href
+        start_url: url.toString()
     };
     document.querySelector(`link[rel="manifest"]`)?.remove();
     const link = document.createElement("link");
