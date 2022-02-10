@@ -4,6 +4,7 @@ import { updateSpokenSentenceUseCase } from "./UpdateSpokenSentenceUseCase";
 import * as VoiceEditorState from "./VoiceEditorState";
 import { basicSetup, EditorState, EditorView } from "@codemirror/basic-setup";
 import { cursorDocEnd, cursorLineDown } from "@codemirror/commands";
+import { placeholder } from "@codemirror/view";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import type { JSXInternal } from "preact/src/jsx";
 // import { updateVoiceEditorTextUseCase } from "./UpdateVoiceEditorTextUseCase";
@@ -32,7 +33,24 @@ export const VoiceEditor = (props: VoiceEditorProps) => {
     useEffect(() => {
         const editorState = EditorState.create({
             doc: appMode.shouldNotSave ? "" : storage,
-            extensions: [basicSetup, updateListenerExtension()],
+            extensions: [
+                basicSetup,
+                updateListenerExtension(),
+                placeholder(`
+            
+
+
+
+
+
+
+1. マイクの使用を許可する
+2. 音声入力するとメモが記録される
+
+詳しくは https://github.com/azu/voicod を参照
+
+`),
+            ],
         });
         updateVoiceEditorTextUseCase(storage);
         const editorView = new EditorView({
