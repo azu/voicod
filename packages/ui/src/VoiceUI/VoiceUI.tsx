@@ -29,6 +29,7 @@ export const VoiceUI = (props: VoiceUIProps) => {
     const editorState = useStore(voiceEditorState);
     const visible = useTabVisibility();
     const tabFocus = useTabFocus();
+    const isSupportedSpeechRecognition = useMemo(() => typeof _SpeechRecognition !== "undefined", []);
     const siriRef = useRef<HTMLDivElement>(null);
     const [siriWave, setSiriWave] = useState<SiriWave>();
     useEffect(() => {
@@ -122,7 +123,6 @@ export const VoiceUI = (props: VoiceUIProps) => {
     }, [visible, xCallback]);
     useEffect(() => {
         const shouldPlay = visible || tabFocus;
-        console.log("status", status);
         if (shouldPlay && status === "pause" && !userWantToStop) {
             console.log("reactive");
             try {
@@ -179,7 +179,13 @@ export const VoiceUI = (props: VoiceUIProps) => {
                     )}
                 </div>
             </div>
-            <p class={"VoiceUI-text"}>{text}</p>
+            {isSupportedSpeechRecognition ? (
+                <p className={"VoiceUI-text"}>{text}</p>
+            ) : (
+                <p className={"VoiceUI-text"}>
+                    Your browser does not support SpeechRecognition API. Please use a browser like Chrome/Safari.
+                </p>
+            )}
             <div ref={siriRef} class={"VoiceUI-bar"} />
         </div>
     );
